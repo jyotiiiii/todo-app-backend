@@ -20,10 +20,24 @@ functions:
           path: tasks
           method: post
           cors: true
-  # find:
-  #   handler: handler.find
-  #   events:
-  #     - http:
-  #         path: tasks/{id}
-  #         method: get
-  #         cors: true
+  edit:
+    handler: handler.edit
+    events:
+      - http:
+          path: tasks/{id}
+          method: put
+          cors: true
+  remove:
+    handler: handler.remove
+    events:
+      - http:
+          path: tasks/{id}
+          method: delete
+          cors: true
+  find:
+  handler: handler.find
+  events:
+    - http:
+        path: tasks/{id}
+        method: get
+        cors: true
