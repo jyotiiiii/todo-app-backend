@@ -27,6 +27,10 @@ functions:
           path: tasks/{id}
           method: put
           cors: true
+          request:
+            parameters:
+              paths:
+                id: true
   remove:
     handler: handler.remove
     events:
@@ -34,6 +38,10 @@ functions:
           path: tasks/{id}
           method: delete
           cors: true
+          request:
+            parameters:
+              paths:
+                id: true
   find:
   handler: handler.find
   events:
@@ -41,3 +49,7 @@ functions:
         path: tasks/{id}
         method: get
         cors: true
+        request:
+          parameters:
+            paths:
+              id: true
