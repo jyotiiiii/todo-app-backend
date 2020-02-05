@@ -13,3 +13,17 @@ functions:
           path: tasks
           method: get
           cors: true
+  create:
+    handler: handler.create
+    events:
+      - http:
+          path: tasks
+          method: post
+          cors: true
+  # find:
+  #   handler: handler.find
+  #   events:
+  #     - http:
+  #         path: tasks/{id}
+  #         method: get
+  #         cors: true
