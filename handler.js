@@ -50,27 +50,23 @@ app.post('/tasks/', function(req, res) {
   });
 });
 
-app.put('/tasks/:id', function(req, res) {
+app.put('/tasks/', function(req, res) {
   res.send({
     message:
       "This PUT request will edit a task by id or create a new task if id doesn't exist"
   });
 });
 
-app.delete('/tasks/:id', function(req, res) {
+app.delete('/tasks/', function(req, res) {
   res.send({
     message: 'This DELETE request will remove a task'
   });
 });
 
-app.get('/tasks/:id', function(req, res) {
+app.get('/tasks/', function(req, res) {
   res.send({
     message: 'This GET request will search for a task by id'
   });
 });
 
 module.exports.tasks = serverless(app);
-module.exports.create = serverless(app);
-module.exports.edit = serverless(app);
-module.exports.remove = serverless(app);
-module.exports.find = serverless(app);
