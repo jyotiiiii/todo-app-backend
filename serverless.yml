@@ -18,14 +18,14 @@ functions:
           method: post
           cors: true
       - http:
-          path: tasks
+          path: tasks/{id}
           method: put
           cors: true
       - http:
-          path: tasks
+          path: tasks/{id}
           method: delete
           cors: true
       - http:
-          path: tasks
+          path: tasks/{id}
           method: get
           cors: true
