@@ -58,10 +58,26 @@ app.post('/tasks/', function(req, res) {
 // INSERT INTO task VALUES ('0c9341ce-1184-4bd9-b90d-6843034c8fe2', '5cd7209f-b05b-456a-9327-55e8af3f945e', 0, 'Go for a walk in the forest', 0, 15);
 
 app.put('/tasks/:id', function(req, res) {
-  res.send({
-    message:
-      "This PUT request will edit a task by id or create a new task if id doesn't exist"
-  });
+  // get the task id from client
+  const taskCompleted = req.params;
+  // set completed to 1 where id = id
+
+  connection.query(
+    'UPDATE `task` SET `completed` = ? WHERE `id` = ?',
+    [true, taskCompleted.id],
+    function(error, results, fields) {
+      if (error) {
+        console.error(
+          'Your query had a problem with marking a task as complete',
+          error
+        );
+        res.status(500).json({ errorMessage: error });
+      } else {
+        // return to the client information about the task that has been created
+        res.json({ task: taskCompleted });
+      }
+    }
+  );
 });
 
 app.delete('/tasks/:id', function(req, res) {
