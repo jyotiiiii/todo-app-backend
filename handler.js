@@ -4,15 +4,15 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-  host: 'xxxxx',
-  user: 'xxxxx',
-  password: 'xxxxx',
-  database: 'xxxxx'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_SCHEMA
 });
 
 app.get('/tasks', function(req, res) {
   connection.query(
-    'SELECT * FROM `task` WHERE `user_id`  = "5cd7209f-b05b-456a-9327-55e8af3f945e"',
+    'SELECT * FROM `task` WHERE `user_id` = "5cd7209f-b05b-456a-9327-55e8af3f945e"',
     function(error, results, fields) {
       // error will be an Error if one occurred during the query
       if (error) {
