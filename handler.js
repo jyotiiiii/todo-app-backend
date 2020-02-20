@@ -58,7 +58,7 @@ app.post('/tasks/', function(req, res) {
 // INSERT INTO task VALUES ('0c9341ce-1184-4bd9-b90d-6843034c8fe2', '5cd7209f-b05b-456a-9327-55e8af3f945e', 0, 'Go for a walk in the forest', 0, 15);
 
 app.put('/tasks/:id', function(req, res) {
-  // get the task id from client
+  // get the task id from client url
   const taskCompleted = req.params;
   // set completed to 1 where id = id
 
@@ -73,7 +73,7 @@ app.put('/tasks/:id', function(req, res) {
         );
         res.status(500).json({ errorMessage: error });
       } else {
-        // return to the client information about the task that has been created
+        // return to the client the task id that has been updated
         res.json({ task: taskCompleted });
       }
     }
@@ -81,9 +81,22 @@ app.put('/tasks/:id', function(req, res) {
 });
 
 app.delete('/tasks/:id', function(req, res) {
-  res.send({
-    message: 'This DELETE request will remove a task'
-  });
+  // get the task id from the client (url)
+  const taskDelete = req.params;
+  // delete the whole row where id = id
+  connection.query(
+    'DELETE FROM `task` WHERE `id` = ?',
+    [taskDelete.id],
+    function(error, results, fields) {
+      if (error) {
+        console.error('Your query had a problem with deleting a task', error);
+        res.status(500).json({ errorMessage: error });
+      } else {
+        // return to the client the task id that has been deleted
+        res.json({ task: taskDelete });
+      }
+    }
+  );
 });
 
 app.get('/tasks/:id', function(req, res) {
