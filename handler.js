@@ -100,9 +100,22 @@ app.delete('/tasks/:id', function(req, res) {
 });
 
 app.get('/tasks/:id', function(req, res) {
-  res.send({
-    message: 'This GET request will search for a task by id'
-  });
+  // get the task id from the client (url)
+  const taskSearch = req.params;
+  // get all the info for task id = id
+  connection.query(
+    'SELECT * FROM `task` WHERE `id` = ?',
+    [taskSearch.id],
+    function(error, results, fields) {
+      if (error) {
+        console.error('Your query had a problem with finding the task', error);
+        res.status(500).json({ errorMessage: error });
+      } else {
+        // return to the client the task info for the id given
+        res.json({ task: results });
+      }
+    }
+  );
 });
 
 module.exports.tasks = serverless(app);
