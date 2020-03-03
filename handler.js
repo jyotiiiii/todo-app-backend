@@ -3,8 +3,10 @@ const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
 app.use(express.json());
-const uuidv4 = require('uuid/v4');
+// const uuidv4 = require('uuid/v4');
 const mysql = require('mysql');
+const cors = require('cors');
+app.use(cors());
 
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -34,7 +36,7 @@ app.post('/tasks/', function(req, res) {
   // about what task is being created
 
   const tasktoInsert = req.body;
-  tasktoInsert.id = uuidv4();
+  // tasktoInsert.id = uuidv4();
   // take that information and pre-populate a SQL insert statement
   // execute the statement
   connection.query('INSERT INTO `task` SET ?', tasktoInsert, function(
