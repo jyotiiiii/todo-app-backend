@@ -1,5 +1,8 @@
 service: todo-app-backend
 
+plugins:
+  - serverless-offline
+
 provider:
   name: aws
   runtime: nodejs12.x
@@ -12,7 +15,7 @@ provider:
 
 functions:
   tasks:
-    handler: handler.tasks
+    handler: tasks.handler
     events:
       - http:
           path: tasks
@@ -33,4 +36,11 @@ functions:
       - http:
           path: tasks/{id}
           method: get
+          cors: true
+  users:
+    handler: users.handler
+    events:
+      - http:
+          path: users/{id}
+          method: put
           cors: true

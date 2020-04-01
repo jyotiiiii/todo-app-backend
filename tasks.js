@@ -120,4 +120,4 @@ app.get('/tasks/:id', function(req, res) {
   );
 });
 
-module.exports.tasks = serverless(app);
+module.exports.handler = serverless(app);
