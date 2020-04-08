@@ -61,12 +61,13 @@ app.post('/tasks/', function(req, res) {
 
 app.put('/tasks/:id', function(req, res) {
   // get the task id from client url
-  const taskCompleted = req.params;
+  //destructuring object: this is the same as const taskCompleted = req.body.taskCompleted;
+  const {taskCompleted} = req.body;
   // set completed to 1 where id = id
 
   connection.query(
     'UPDATE `task` SET `completed` = ? WHERE `id` = ?',
-    [true, taskCompleted.id],
+    [taskCompleted, req.params.id],
     function(error, results, fields) {
       if (error) {
         console.error(
