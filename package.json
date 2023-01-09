@@ -26,6 +26,6 @@
     "uuidv4": "^6.0.2"
   },
   "devDependencies": {
-    "serverless-offline": "^6.1.3"
+    "serverless-offline": "^12.0.4"
   }
 }
